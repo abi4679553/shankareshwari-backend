@@ -15,6 +15,4 @@ router.use(candidateRouter);
 
 
 
-
-
 module.exports = router

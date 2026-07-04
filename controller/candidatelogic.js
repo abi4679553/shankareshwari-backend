@@ -72,11 +72,90 @@ const fetchcandidateByEmail = async (req, res) => {
         return res.json({ success: "true", message: "candidate fetch successfully", data: candidate })
 
     }
-        catch(err){
+    catch (err) {
         console.log("Error in fetch candidate")
-        return res.json({success : false , message : "Error in fetch candidate"})
-}
+        return res.json({ success: false, message: "Error in fetch candidate" })
+    }
 }
 
+const deletecandidate = async (req, res) => {
+    try {
+        const { email } = req.params
 
-module.exports = { Createcandidatelogic, fetchcandidate, fetchcandidateByEmail }
+        const candidate = await condidatelogicModel.findOneAndDelete({ email })
+        if (!candidate) {
+            return res.json({
+                success: "false",
+                message: "candidate not found"
+            });
+        }
+        res.json({
+            success: "true",
+            message: "candidate deleted successfully"
+        });
+    }
+    catch (err) {
+        return res.json({
+            success: "false",
+            message: err.message
+        });
+    }
+}
+
+const deleteAllcandidate = async (req, res) => {
+    try {
+        const candidate = await condidatelogicModel.deleteMany({});
+
+        if (!candidate) {
+            return res.json({
+                success: true,
+                message: "All candidates no deleted "
+            });
+
+        }
+        return res.json({
+            success: true,
+            message: "All candidates deleted successfully"
+        });
+
+    }
+    catch (err) {
+        console.log(err);
+        return res.json({
+            success: false,
+            message: "Error deleting candidates"
+        });
+    }
+};
+
+const updatecandidate = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        const updateData = req.body;
+
+        const candidate = await condidatelogicModel.findOneAndUpdate({email},req.body,{ new: true });
+
+        if (!candidate) {
+            return res.json({
+                success: false,
+                message: "Candidate not found"
+            });
+        }
+
+        return res.json({
+            success: true,
+            message: "Candidate updated successfully",
+            data: candidate
+        });
+
+    } catch (err) {
+        console.log("Error in update candidate", err);
+        return res.json({
+            success: false,
+            message: "Error in update candidate"
+        });
+    }
+};
+
+module.exports = { Createcandidatelogic, fetchcandidate, fetchcandidateByEmail, deletecandidate, deleteAllcandidate, updatecandidate }
