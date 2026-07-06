@@ -1,18 +1,13 @@
-const express = require('express')
-const candidateRouter = require("../router/candidaterouter");
+const express = require("express");
 
+const router = express.Router();
 
+const candidateRouter = require("./candidaterouter");
+const Registerrouter = require("./Registerrouter");
+const Todolistrouter = require("./Todolistrouter");
 
-const router = express.Router()
-
-const Registerrouter = require('./Registerrouter');
-const { Createcandidatelogic } = require('../controller/candidatelogic');
-
-router.use(Registerrouter)
 router.use(candidateRouter);
+router.use(Registerrouter);
+router.use(Todolistrouter);
 
-
-
-
-
-module.exports = router
+module.exports = router;

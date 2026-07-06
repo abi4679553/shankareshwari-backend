@@ -8,7 +8,7 @@ const Listen = async (app) => {
             console.log("port is verified successfully")
         }
         app.listen(process.env.PORT,()=>{
-            console.log(`server Server is runnning on port : ${port}`);
+            console.log(` Server is runnning on port : ${port}`);
         })
 
     }
