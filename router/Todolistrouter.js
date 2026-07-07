@@ -1,10 +1,8 @@
-const express = require ("express")
-const  {CreateTodolistlogic,fetchTodolist, fetchTodolistById} = require("../controller/Todolistlogic")
-
+const express = require("express")
+const{ CreateTodolist } = require("../controller/Todolist")
 const router = express.Router()
 
-router.post('/Create-Todolistlogic',CreateTodolistlogic)
-router.get('/fetch-Todolist',fetchTodolist)
-router.get('/fetch-Todolist/:reg ',fetchTodolistById)
 
-module.exports = router
+router.post('/Create-Todolist', CreateTodolist)
+
+module.exports = router;
