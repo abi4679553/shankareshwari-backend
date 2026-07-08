@@ -61,5 +61,40 @@ const fetchTodolistById = async (req, res) => {
 
 }
 
+const deleteTodolist = async (req, res) => {
+    try {
+        const { RollNumber } = req.params
 
-module.exports = { CreateTodolist, fetchTodolist, fetchTodolistById }
+        const Todolist = await TodolistModel.findOneAndDelete({ RollNumber })
+        if (!Todolist) {
+            return res.json({ success: false, message: "  Todolist is not fount" })
+        }
+        return res.json({ success: true, message: "tododlist is deleted successfully ", data: Todolist })
+    }
+    catch (err) {
+
+        console.log("error in delete todolist", err)
+        return res.json({ success: false, message: "error in todolist delete" });
+    }
+}
+
+const updateTodolist = async (req, res) => {
+    try {
+        const { RollNumber } = req.params
+
+        const Todolist = await TodolistModel.findOneAndUpdate({ RollNumber }, req.body,{ new: true });
+
+        if (!Todolist) {
+            return res.json({ success: false, message: " not update todolist " })
+        }
+        return res.json({ success: true, message: " updated todolist", data: Todolist  })
+    }
+    catch (err) {
+        console.log("error in update  todolist", err)
+        return res.json({ success: false, message: "error in todolist update"});
+
+    }
+}
+
+
+module.exports = { CreateTodolist, fetchTodolist, fetchTodolistById, deleteTodolist, updateTodolist }
