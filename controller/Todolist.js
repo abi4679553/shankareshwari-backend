@@ -6,7 +6,7 @@ const CreateTodolist = async (req, res) => {
         if (!RollNumber || !title || !description || !status || !priority || !dueDate) {
             return res.json({ success: false, message: "All fields are requires" })
         }
-        const isExisting = await TodolistModel.findOne({RollNumber})
+        const isExisting = await TodolistModel.findOne({ RollNumber })
         if (isExisting) {
             return res.json({ success: false, message: "Already existing the todolist" })
         }
@@ -29,4 +29,37 @@ const CreateTodolist = async (req, res) => {
     }
 };
 
-module.exports = { CreateTodolist }
+const fetchTodolist = async (req, res) => {
+    try {
+        const Todolist = await TodolistModel.find({})
+        if (!Todolist) {
+            return res.json({ success: false, message: " Todolist not found " })
+        }
+        return res.json({ success: true, message: " todolist fetch successfully ", data: Todolist })
+    }
+    catch (err) {
+        console.log("error in fetch todolist", err)
+        return res.json({ success: false, message: "error in todolist" });
+    }
+}
+
+const fetchTodolistById = async (req, res) => {
+    try {
+        const { RollNumber } = req.params;
+
+        const Todolist = await TodolistModel.findOne({ RollNumber })
+        if (!Todolist) {
+            return res.json({ success: false, message: " todolist fetchbyid not found" })
+        }
+        return res.json({ success: true, message: " todolistbyid fetch successfully", data: Todolist })
+    }
+    catch (err) {
+
+        console.log("error in fetch todolist", err)
+        return res.json({ success: false, message: "error in todolistbyid" });
+    }
+
+}
+
+
+module.exports = { CreateTodolist, fetchTodolist, fetchTodolistById }
