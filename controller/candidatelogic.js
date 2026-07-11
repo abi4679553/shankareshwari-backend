@@ -158,4 +158,5 @@ const updatecandidate = async (req, res) => {
     }
 };
 
+
 module.exports = { Createcandidatelogic, fetchcandidate, fetchcandidateByEmail, deletecandidate, deleteAllcandidate, updatecandidate }

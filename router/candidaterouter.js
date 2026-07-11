@@ -15,4 +15,6 @@ router.delete('/delete-candidate',deleteAllcandidate)
 
 router.put('/update-candidate/:email',updatecandidate)
 
+
+
 module.exports = router;
