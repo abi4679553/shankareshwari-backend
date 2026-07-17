@@ -22,7 +22,7 @@ const Createform = async (req, res) => {
         }
 
         const newUser = await formModel.create({
-            Name,
+            name : Name,
             email,
             password
         });
@@ -60,5 +60,21 @@ const fetchform = async (req, res) => {
     }
 }
 
+const deleteform = async(req,res) =>{
+    try{
+        const {id} = req.params;
+        const form = await formModel.findByIdAndDelete(id)
+        if(!form){
+            return res.json({success : false, message:"delete for not fount "})
 
-module.exports = { Createform ,fetchform};
+        }
+        return res.json({success:true,message : "delete message is successfully completed!"})
+
+    }
+    catch(err) {
+        console.log(err.message)
+        return res.json({success : false, message : "the delete method for network error"})
+    }
+}
+
+module.exports = { Createform ,fetchform, deleteform };

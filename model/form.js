@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const formSchema = new mongoose.Schema({
-        Name: {
+        name: {
         type: String,
         required: true
     },
@@ -16,7 +16,7 @@ const formSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-
+   
     },
      {
     timestamps: true
