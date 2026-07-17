@@ -1,10 +1,9 @@
-const express = require("express")
-const {form, Createform} = require("../controller/form")
+const express = require("express");
+const { Createform } = require("../controller/form");
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/Create-form',Createform)
+router.post("/Create-form", Createform);
 
 
-
-module.exports = router
+module.exports = router;
